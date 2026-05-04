@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Perro Aleatorio</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; padding-top: 50px; }
+        img { max-width: 500px; border-radius: 15px; shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>¡Mira este perro!</h1>
+    
+    <!-- Aquí es donde se meterá la imagen -->
+    <div>
+        <img id="mi-perro" src="" alt="Cargando perrito...">
+    </div>
+    
+    <br>
+    <button onclick="traerPerro()">¡Quiero otro!</button>
+
+    <script>
+        function traerPerro() {
+            fetch('https://dog.ceo/api/breeds/image/random')
+                .then(response => response.json())
+                .then(data => {
+                    // Cambiamos el "src" de la imagen por la URL que nos dio la API
+                    document.getElementById('mi-perro').src = data.message;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        // Llamamos a la función una vez al principio para que no esté vacío
+        traerPerro();
+    </script>
+
+</body>
+</html>
